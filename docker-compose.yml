@@ -1,0 +1,42 @@
+# version: '3.8'
+
+# services:
+#   mysql:
+#     image: mysql:latest
+#     container_name: mysql_container
+#     restart: always
+#     environment:
+#       MYSQL_ROOT_PASSWORD: root
+#       MYSQL_DATABASE: test_db
+#       MYSQL_USER: user
+#       MYSQL_PASSWORD: password
+#     ports:
+#       - "3306:3306"
+#     volumes:
+#       - mysql_data:/var/lib/mysql
+#       - ./mysql-init:/docker-entrypoint-initdb.d # Optional for custom SQL scripts
+
+# volumes:
+#   mysql_data:
+
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0   # Use a stable version for production use, replace 'latest' with a specific version
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root         # Password for root user
+      MYSQL_DATABASE: test_db           # Default database to create
+      MYSQL_USER: user                  # Non-root user (optional)
+      MYSQL_PASSWORD: password          # Password for non-root user (optional)
+    ports:
+      - "3306:3306"                     # Expose MySQL port
+    volumes:
+      - mysql_data:/var/lib/mysql       # Volume for persistent data storage
+      - ./mysql-init:/docker-entrypoint-initdb.d # Optional: custom SQL scripts to initialize the database
+
+volumes:
+  mysql_data:                           # Named volume for MySQL data
+
